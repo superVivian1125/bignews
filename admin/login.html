@@ -1,120 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>大事件-后台登录页</title>
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="css/iconfont.css" />
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css" />
-  </head>
 
-  <body>
-    <div class="main_wrap">
-      <div class="header">
-        <a href="#" class="logo"><img src="images/logo.png" alt=""/></a>
-        <div class="copyright">
-          CopyRight © 2019 深圳百秀信息技术股份有限公司<br />All Rights Reserved
-        </div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>大事件-后台登录页</title>
+  <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+  <link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css" />
+</head>
 
-      <div class="login_form_con">
-        <div class="login_title"></div>
-        <form class="login_form">
-          <i class="iconfont icon-user"></i>
-          <i class="iconfont icon-key"></i>
-          <input type="text" class="input_txt" placeholder="邮箱/手机号" />
-          <input type="password" class="input_pass" placeholder="密码" />
-          <input type="submit" class="input_sub" value="登 录" />
-        </form>
+<body>
+  <div class="main_wrap">
+    <div class="header">
+      <a href="#" class="logo"><img src="images/logo.png" alt="" /></a>
+      <div class="copyright">
+        CopyRight © 2019 深圳百秀信息技术股份有限公司<br />All Rights Reserved
       </div>
     </div>
 
-    <!-- 模态框 -->
-    <div
-      class="modal fade"
-      id="myModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">温馨提示</h4>
-          </div>
-          <div class="modal-body"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">
-              关闭
-            </button>
-            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-          </div>
+    <div class="login_form_con">
+      <div class="login_title"></div>
+      <form class="login_form">
+        <i class="iconfont icon-user"></i>
+        <i class="iconfont icon-key"></i>
+        <input type="text" class="input_txt" placeholder="邮箱/手机号" />
+        <input type="password" class="input_pass" placeholder="密码" />
+        <input type="submit" class="input_sub" value="登 录" />
+      </form>
+    </div>
+  </div>
+
+  <!-- 模态框 -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            关闭
+          </button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="./js/jquery-1.12.4.min.js"></script>
-    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+  <script src="./js/jquery-1.12.4.min.js"></script>
+  <script src="./js/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- 业务逻辑代码 -->
-    <script>
-      //实现登陆功能
-      $(function(){
-        //给登陆按钮绑定一个点击事件
-        $('.input_sub').on('click',function(){
-          //获取用户名的值
-          //获取密码框里的值
-          var useName=$('.input_txt').val().trim()
-          var password=$('.input_pass').val().trim()
-          console.log(password);
-          console.log(useName);
-          //判断用户名和密码是否为空
-          if(useName==""||password==""){
-            alert('请输入用户名或密码')
-            return
+  <!-- 业务逻辑代码 -->
+  <script>
+    //实现登陆功能
+    $(function () {
+      //给登陆按钮绑定一个点击事件
+      $('.input_sub').on('click', function () {
+        //获取用户名的值
+        //获取密码框里的值
+        var useName = $('.input_txt').val().trim()
+        var password = $('.input_pass').val().trim()
+        console.log(password);
+        console.log(useName);
+        //判断用户名和密码是否为空
+        if (useName == "" || password == "") {
+          alert('请输入用户名或密码')
+          return
+        }
+        //发送ajax请求
+        $.ajax({
+          url: 'http://47.111.184.55:8888/api/v1/admin/user/login',
+          type: 'post',
+          data: {
+            username: username,
+            password: password,
+          },
+          success: function (respond) {
+            if (respond.code == 200) {
+              //window下面传入token成功的值
+              window.localStorage.setItem("token", respond.token)
+              location.href('index.html')
+            } else {
+              alert('登陆错误')
+            }
+
+
           }
-          //发送ajax请求
-          $.ajax({
-             url:'http://47.111.184.55:8888/api/v1/admin/user/login',
-             type:'post', 
-             data:{
-              username:username,
-              password:password,
-              },
-              success:function(respond){
-                if(respond.code==200){
-                   //window下面传入token成功的值
-                  window.localStorage.setItem("token", respond.token)
-                   location.href('index.html')
-                }else{
-                  alert('登陆错误')
-                }
-  
-                 
-              }
-            
 
-          })
-         
-         //阻止默认事件跳转行为        
-          return false
+
         })
-     
-  
 
-
+        //阻止默认事件跳转行为        
+        return false
       })
-    
-    </script>
-  </body>
+
+
+
+
+    })
+
+  </script>
+</body>
+
 </html>
