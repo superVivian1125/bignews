@@ -146,9 +146,9 @@
     </div>
     <div class="right_con">
       <div class="common_wrap">
-        <h3><i class="fa fa-bar-chart" ></i> 一周热门排行</h3>
-        <ul class="content_list hotList"id ="HootdoorFather">
-         </ul>
+        <h3><i class="fa fa-bar-chart"></i> 一周热门排行</h3>
+        <ul class="content_list hotList" id="HootdoorFather">
+        </ul>
       </div>
       <div class="common_wrap">
         <h3><i class="fa fa-commenting-o"></i> 最新评论</h3>
@@ -164,17 +164,17 @@
   </div>
 
   <div class="footer clearfix">
-     <div class="foot_link">
-        <a href="#">关于我们</a>
-        <span>|</span>
-        <a href="#">联系我们</a>
-        <span>|</span>
-        <a href="#">招聘人才</a>
-        <span>|</span>
-        <a href="#">友情链接</a>
-      </div>
-      <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
-      <p>电话：0755-****888 粤ICP备*******8号</p>
+    <div class="foot_link">
+      <a href="#">关于我们</a>
+      <span>|</span>
+      <a href="#">联系我们</a>
+      <span>|</span>
+      <a href="#">招聘人才</a>
+      <span>|</span>
+      <a href="#">友情链接</a>
+    </div>
+    <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
+    <p>电话：0755-****888 粤ICP备*******8号</p>
   </div>
   <!--最新评论模板 -->
   <script type="text/html" id="latestComments">
@@ -186,18 +186,18 @@
    </li>
      {{/each}}
   </script>
-  
+
   <!-- 焦点关注模板 -->
   <script type="text/html" id="focusTemplate">
     {{each data.data}}
     <li><a href="#">{{$value.intro}}</a></li>
     {{/each}}
   </script>
-  
+
   <!-- 文章热门排行模板-->
   <script type="text/html" id="HoutdoorTemplate">
     {{each data.data}}
-    <li><span class="first">1</span><a href="#">{{$value.title}}</a></li>
+    <li><span>{{$index+1}}</span><a href="#">{{$value.title}}</a></li>
     {{/each}}
   </script>
 
@@ -206,63 +206,65 @@
 
   <!-- index 代码 -->
   <script>
-      function formateDate() {
-        // 将日期字符串转换
-        date = new Date();
-        return date.getMonth() + 1;
-      }
-      template.defaults.imports.formateDate = formateDate
-   $(function(){
-      //1.发送ajax请求获取最新评论
-    //一个评论的模板 拼接到页面之中
-    // //最新评论
-     $.ajax({
-       url: 'http://47.111.184.55:8888/api/v1/index/latest_comment',
-       type: 'get',
-       success: function (data) {
-         console.log(data);
-         //拼接字符串
-         var html = template('latestComments', { data:data })
- 
-         $('#Commenttemplatefather').html(html)
-       }
-     })
+    function formateDate() {
+      // 将日期字符串转换
+      date = new Date();
+      return date.getMonth() + 1;
+    }
+    template.defaults.imports.formateDate = formateDate
+    $(function () {
+      //   1.发送ajax请求获取最新评论
+      // 一个评论的模板 拼接到页面之中
+      //最新评论
+      $.ajax({
+        url: 'http://47.111.184.55:8888/api/v1/index/latest_comment',
+        type: 'get',
+        success: function (data) {
+          console.log(data);
+          //拼接字符串
+          var html = template('latestComments', { data: data })
 
-    //2.焦点关注
-    //发送ajax请求
-    $.ajax({
-      type: 'get',
-      url: 'http://47.111.184.55:8888/api/v1/index/attention',
-      success: function (data) {
-        console.log(data);
-        //进行字符串拼接
-        var html = template('focusTemplate',{data:data})
-        console.log(html);
-        //显示在页面之中
-        $('#FocusTemplateFather').html(html)
+          $('#Commenttemplatefather').html(html)
+        }
+      })
 
-      }
+      //2.焦点关注
+      //发送ajax请求
+      $.ajax({
+        type: 'get',
+        url: 'http://47.111.184.55:8888/api/v1/index/attention',
+        success: function (data) {
+          console.log(data);
+          //进行字符串拼接
+          var html = template('focusTemplate', { data: data })
+          console.log(html);
+          //显示在页面之中
+          $('#FocusTemplateFather').html(html)
 
+        }
+
+
+      })
+
+      //热门模块
+      $.ajax({
+        url: 'http://47.111.184.55:8888/api/v1/index/rank',
+        type: 'get',
+        success: function (data) {
+          console.log(data);
+          //进行字符串拼接
+          var html = template('HoutdoorTemplate', { data: data})
+          console.log(html);
+          //显示在页面之中
+          $('#HootdoorFather').html(html)
+          $('#HootdoorFather li:eq(0) span').addClass("first")
+          $('#HootdoorFather li:eq(1) span').addClass("second")
+          $('#HootdoorFather li:eq(2) span').addClass("third")
+        }
+
+      })
 
     })
-  
-    //热门模块
-    $.ajax({
-      url:'http://47.111.184.55:8888/api/v1/index/rank',
-      type:'get',
-      success:function(data){
-      console.log(data);
-      //进行字符串拼接
-       var html = template('HoutdoorTemplate',{data:data})
-       console.log(html);
-       //显示在页面之中
-        $('#HootdoorFather').html(html)
-    
-     }
-
-    })
-
-   })
   </script>
 </body>
 
