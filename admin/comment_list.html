@@ -30,17 +30,7 @@
           </tr>
         </thead>
         <tbody id="commentBox">
-          <tr>
-            <td>小周</td>
-            <td>这是一条测试评论，欢迎光临</td>
-            <td>《世界，你好》</td>
-            <td>2017-07-04 12:00:00</td>
-            <td>已批准</td>
-            <td class="text-center">
-              <a href="javascript:;" class="btn btn-warning btn-xs">拒绝</a>
-              <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
-            </td>
-          </tr>
+
         </tbody>
       </table>
 
@@ -62,6 +52,22 @@
 
     </div>
   </div>
+  <!-- 评论列表的模板 -->
+  <script type="text/html">
+    <tr>
+      <td>小周</td>
+      <td>这是一条测试评论，欢迎光临</td>
+      <td>《世界，你好》</td>
+      <td>2017-07-04 12:00:00</td>
+      <td>已批准</td>
+      <td class="text-center">
+        <a href="javascript:;" class="btn btn-warning btn-xs">拒绝</a>
+        <a href="javascript:;" class="btn btn-danger btn-xs" >删除</a>
+      </td>
+    </tr>
+  
+  </script>
+
 
   <script src="js/jquery-1.12.4.min.js"></script>
   <script src="../js/template-web.js"></script>
@@ -72,11 +78,23 @@
       window.parent.setMenu(0, 0);
     })
   </script>
-
+   
   <!-- 业务逻辑代码 -->
   <script>
+    // 评论列表 删除按钮
+  //  $(function(){
+  //   $('#commentBox').on('click','delete',function(){
+  //        //获取你当前点击删除按钮的这个Id
+  //        var id = $(this). attr('data-id')
+  //        console.log(id);
+         
 
+
+  //   })
     
+
+  //  })
+
   </script>
 </body>
 
