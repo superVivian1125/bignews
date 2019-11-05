@@ -18,58 +18,10 @@
     <div class="common_title">
       文章编辑
     </div>
-    <div class="container-fluid common_con">
-      <form class="form-horizontal article_form">
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
-          <div class="col-sm-10">
-            <input type="email" name="title" class="form-control title" id="inputEmail3" value="文章标题文字">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
-          <div class="col-sm-10">
-            <img src="images/pic06.jpg" class="article_cover">
-            <input name="cover" type="file" id="exampleInputFile">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
-          <div class="col-sm-4">
-            <select class="form-control category" name="categoryId">
-              <option>类别一</option>
-              <option>类别二</option>
-              <option>类别三</option>
-              <option selected>类别四</option>
-              <option>类别五</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">发布时间：</label>
-          <div class="col-sm-4">
+    <div class="container-fluid common_con" id="modifyArticleParent">
 
-            <div class="input-group">
-              <input type="text" name="date" class="form-control" value="2019-05-17" id="dateinput">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button" onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
-                    class="iconfont icon-icondate"></i></button>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="rich_content" placeholder="文章内容" value="文章内容">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success btn-edit">修改</button>
-          </div>
-        </div>
-      </form>
+
+
     </div>
   </div>
 
@@ -78,10 +30,68 @@
   <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
   <script src="js/tinymce/js/tinymce_setup.js"></script>
   <script src="./js/template-web.js"></script>
+  <script src="./js/adminJs/article_edit.js"></script>
+
+
+
+  <script type="text/html" id="modifyArticle">
+    <form class="form-horizontal article_form" id="submission">
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
+        <div class="col-sm-10">
+          <input type="text" name="title" class="form-control title" id="inputEmail3" value="{{data.title}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
+        <div class="col-sm-10">
+          <img src="{{data.cover}}" class="article_cover" id="coverImg">
+          <input name="cover" id="exampleInputFile" type="file" >
+          <input name="cover" id="example" type="hidden" value="{{data.cover}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
+        <div class="col-sm-4">
+          <select class="form-control category" name="categoryId" id="categoryId">
+            {{each response.data}}
+            <option value="{{$value.id}}">{{$value.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">发布时间：</label>
+        <div class="col-sm-4">
+
+          <div class="input-group">
+            <input type="text" name="date" class="form-control" value="{{data.date}}" id="dateinput">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button"
+                onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
+                  class="iconfont icon-icondate"></i></button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
+        <div class="col-sm-10">
+          <input type="text" name="content" class="form-control" id="rich_content" placeholder="文章内容" value="{{data.content}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-success btn-edit" id="jojo">修改</button>
+        </div>
+      </div>
+    </form>
+  </script>
+  
 
   <!-- 业务逻辑代码 -->
   <script>
-    
+
   </script>
 </body>
 

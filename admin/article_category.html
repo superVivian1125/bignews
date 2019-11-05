@@ -26,50 +26,16 @@
             <th class="text-center" width="100">操作</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>未分类</td>
-            <td>uncategorized</td>
-            <td class="text-center">
-              <a href="javascript:;" class="btn btn-info btn-xs">编辑</a>
-              <a href="javascript:deleteTr( 1 );" class="btn btn-danger btn-xs">删除</a>
-            </td>
-          </tr>
+        <tbody id="tbodyParent">
 
-          <tr>
-            <td>奇趣事</td>
-            <td>funny</td>
-            <td class="text-center">
-              <a href="javascript:editTr({&quot;id&quot;:&quot;2&quot;,&quot;slug&quot;:&quot;funny&quot;,&quot;name&quot;:&quot;奇趣事&quot;});"
-                class="btn btn-info btn-xs">编辑</a>
-              <a href="javascript:deleteTr( 2 );" class="btn btn-danger btn-xs">删除</a>
-            </td>
-          </tr>
 
-          <tr>
-            <td>会生活</td>
-            <td>living</td>
-            <td class="text-center">
-              <a href="javascript:editTr({&quot;id&quot;:&quot;3&quot;,&quot;slug&quot;:&quot;living&quot;,&quot;name&quot;:&quot;会生活&quot;});"
-                class="btn btn-info btn-xs">编辑</a>
-              <a href="javascript:deleteTr( 3 );" class="btn btn-danger btn-xs">删除</a>
-            </td>
-          </tr>
 
-          <tr>
-            <td>爱旅行</td>
-            <td>travel</td>
-            <td class="text-center">
-              <a href="javascript:editTr({&quot;id&quot;:&quot;4&quot;,&quot;slug&quot;:&quot;travel&quot;,&quot;name&quot;:&quot;爱旅行&quot;});"
-                class="btn btn-info btn-xs">编辑</a>
-              <a href="javascript:deleteTr( 4 );" class="btn btn-danger btn-xs">删除</a>
-            </td>
-          </tr>
         </tbody>
         <tfoot>
           <tr>
             <td colspan="3" class="text-center">
-              <a href="#" class="btn btn-success" id="xinzengfenlei" data-toggle="modal" data-target="#addModal">新增分类</a>
+              <a href="#" class="btn btn-success" id="xinzengfenlei" data-toggle="modal"
+                data-target="#addModal">新增分类</a>
             </td>
           </tr>
         </tfoot>
@@ -86,7 +52,7 @@
           <h4 class="modal-title">新增分类</h4>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="addCate">
             <!-- 用一个文本框来保存当前编辑的 分类id -->
             <!-- <input type="text" style="display: none" name="" id="recipient-id"> -->
             <!-- 隐藏域 特性:默认就是隐藏的 -->
@@ -103,7 +69,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" id="model_shutoff">关闭</button>
-          <button type="button" class="btn btn-primary" id="model_add">新增</button>
+          <button type="submit" form="addCate" class="btn btn-primary" id="model_add">新增</button>
         </div>
       </div>
     </div>
@@ -112,6 +78,7 @@
   <script src="js/jquery-1.12.4.min.js"></script>
   <script src="js/bootstrap/js/bootstrap.min.js"></script>
   <script src="./js/template-web.js"></script>
+  <script src="./js/adminJs/article_category.js"></script>
   <script>
     $('#addModal').modal({
       show: false,
@@ -122,10 +89,21 @@
       $('#addModal').modal('hide');
     });
   </script>
-
+  <script type='text/html' id="cateTpl">
+    {{each data}}
+    <tr>
+      <td>{{$value.name}}</td>
+      <td>{{$value.slug}}</td>
+      <td class="text-center">
+        <a href="javascript:;" class="btn btn-info btn-xs">编辑</a>
+        <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+      </td>
+    </tr>
+    {{/each}}
+  </script>
   <!-- 业务逻辑代码 -->
   <script>
-    
+
   </script>
 </body>
 
