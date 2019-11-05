@@ -87,7 +87,8 @@
   </div>
 
   <div class="main" id="main_body">
-    <iframe src="main_count.html" frameborder="0" id="main_frame" name="main_frame" frameborder="0" scrolling="auto"></iframe>
+    <iframe src="main_count.html" frameborder="0" id="main_frame" name="main_frame" frameborder="0"
+      scrolling="auto"></iframe>
   </div>
 
   <!-- 模态框 -->
@@ -95,7 +96,8 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">温馨提示!</h4>
         </div>
         <div class="modal-body">
@@ -112,6 +114,57 @@
 
   <script src="js/jquery-1.12.4.min.js"></script>
   <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    var $level01 = $('.level01');
+    var $subli = $('.level02 li')
+    $level01.click(function () {
+      $level01.not($(this)).removeClass('active');
+      $(this).addClass('active');
+
+      if ($(this).next().hasClass('level02')) {
+        $(this).next().slideToggle();
+        $(this).find('b').toggleClass('rotate0');
+      } else {
+        $subli.removeClass('active');
+      }
+    })
+
+    $subli.click(function () {
+      $subli.not($(this)).removeClass('active');
+      $(this).addClass('active');
+
+      if (!$(this).parent().prev().hasClass('active')) {
+        $level01.removeClass('active');
+        $(this).parent().prev().addClass('active');
+      }
+    })
+
+    function resizeFrame() {
+      var frame_w = $('#main_body').outerWidth();
+      var frame_h = $('#main_body').outerHeight();
+      $('#main_frame').css({
+        'width': frame_w,
+        'height': frame_h
+      });
+    }
+
+    resizeFrame();
+
+    $(window).resize(function () {
+      resizeFrame();
+    })
+
+
+    function setMenu(m, n) {
+      $level01.eq(m).addClass('active').siblings().not('.level02').removeClass('active');
+      if (m != 1) {
+        $('.level02').slideUp();
+      } else {
+        $('.level02').slideDown();
+        $('.level02').children().eq(n).addClass('active').siblings().removeClass('active');
+      }
+    }
+  </script>
   <script>
     var $level01 = $('.level01');
     var $subli = $('.level02 li')

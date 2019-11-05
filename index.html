@@ -15,8 +15,10 @@
   <div class="header">
     <a href="#" class="logo fl"><img src="images/logo.png" alt="logo"></a>
     <div class="search_form fl">
-      <input type="text" class="search_txt" placeholder="黑洞照片">
-      <button class="search_btn"><i class="fa fa-search"></i></button>
+      <form>
+        <input type="text" class="search_txt" placeholder="黑洞照片">
+        <button class="search_btn"><i class="fa fa-search"></i></button>
+      </form>
     </div>
     <div class="link_info fr">
       <a href="#"><i class="fa fa-angle-right"></i>&nbsp;&nbsp;网站地图</a><br>
@@ -28,23 +30,12 @@
     <div class="menu">
       <div class="menu_collapse fl">
         <a href="javascript:;" class="level_one"><i class="fa fa-list-ul"></i>全部分类</a>
-        <ul class="level_two">
-          <li class="up"></li>
-          <li><a href="#">最 新</a></li>
-          <li><a href="#">科 技</a></li>
-          <li><a href="#">股 市</a></li>
-          <li><a href="#">商 品</a></li>
-          <li><a href="#">外 汇</a></li>
-          <li><a href="#">公 司</a></li>
+        <ul class="level_two" id="sortBox">
+
         </ul>
       </div>
-      <ul class="left_menu fl">
-        <li><a href="#">最 新</a></li>
-        <li><a href="#">科 技</a></li>
-        <li><a href="#">股 市</a></li>
-        <li><a href="#">商 品</a></li>
-        <li><a href="#">外 汇</a></li>
-        <li><a href="#">公 司</a></li>
+      <ul class="left_menu fl" id="sortBoxs">
+
       </ul>
       <ul class="right_menu fr">
         <li><a href="#">科技专题</a></li>
@@ -55,27 +46,8 @@
 
   <div class="main_con clearfix">
     <div class="left_con">
-      <ul class="focus_list">
-        <li class="first">
-          <a href="#"><img src="images/pic01.jpg" alt=""></a>
-          <p>图片说明</p>
-        </li>
-        <li>
-          <a href="#"><img src="images/pic02.jpg" alt=""></a>
-          <p>图片说明图片说明图片说明图片说明图片说明图片说明图片说明图片说明图片说明</p>
-        </li>
-        <li>
-          <a href="#"><img src="images/pic03.jpg" alt=""></a>
-          <p>图片说明</p>
-        </li>
-        <li>
-          <a href="#"><img src="images/pic05.jpg" alt=""></a>
-          <p>图片说明</p>
-        </li>
-        <li>
-          <a href="#"><img src="images/pic06.jpg" alt=""></a>
-          <p>图片说明</p>
-        </li>
+      <ul class="focus_list" id="Heatmap">
+
       </ul>
 
       <div class="common_title">
@@ -147,49 +119,14 @@
     <div class="right_con">
       <div class="common_wrap">
         <h3><i class="fa fa-bar-chart"></i> 一周热门排行</h3>
-        <ul class="content_list hotList">
-          <li><span class="first">1</span><a href="#">神奇的水滴摄影，泡泡中的世界泡泡中的世界</a></li>
-          <li><span class="second">2</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
-          <li><span class="third">3</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
-          <li><span>4</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
-          <li><span>5</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
-          <li><span>6</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
-          <li><span>7</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
+        <ul class="content_list hotList" id="ranking">
+
         </ul>
       </div>
       <div class="common_wrap">
         <h3><i class="fa fa-commenting-o"></i> 最新评论</h3>
-        <ul class="content_list comment_list">
-          <li>
-            <span>山</span>
-            <b><em>山治</em> 9个月前(08-14)说:</b>
-            <strong>挺会玩的</strong>
-          </li>
-          <li>
-            <span>丽</span>
-            <b><em>丽丽</em> 9个月前(08-14)说:9个月前(08-14)说:9个月前(08-14)说:</b>
-            <strong>挺会玩的挺会玩的挺会玩的挺会玩的</strong>
-          </li>
-          <li>
-            <span>R</span>
-            <b><em>Rechael</em> 9个月前(08-14)说:</b>
-            <strong>挺会玩的</strong>
-          </li>
-          <li>
-            <span>J</span>
-            <b><em>John</em> 9个月前(08-14)说:</b>
-            <strong>挺会玩的</strong>
-          </li>
-          <li>
-            <span>段</span>
-            <b><em>段正淳</em> 9个月前(08-14)说:</b>
-            <strong>挺会玩的</strong>
-          </li>
-          <li>
-            <span>乔</span>
-            <b><em>乔峰</em> 9个月前(08-14)说:</b>
-            <strong>挺会玩的</strong>
-          </li>
+        <ul class="content_list comment_list" id="comment">
+
         </ul>
       </div>
       <div class="common_wrap">
@@ -225,7 +162,98 @@
   <script src="./js/template-web.js"></script>
 
   <!-- index 代码 -->
+  //文章热门排行
+  <script type="text/html" id="rankingTpl">
+    {{each response}}
+          <li><span>{{$index+1}}</span><a href="#">{{$value.title}}</a></li>
+   {{/each}}
+  </script>
+  //热点图
+  <script type="text/html" id="HeatmapTpl">
+      {{each data}}
+           <li>
+          <a href="#"><img src="{{$value.cover}}"  alt=""></a>
+          <p>图片说明</p>
+        </li>  
+       {{/each}}
+    </script>
+  //文章类型
+  <script type="text/html" id="sortTpl">
+        <li class="up"></li>
+      {{each response}}
+        <li><a href="#">{{$value.name}}</a></li>
+      {{/each}}
+    </script>
+  //最新评论
+  <script type="text/html" id="commentTpl">
+     {{each data}}
+          <li>
+            <span>{{$value.author.substr(0,1)}}</span>
+            <b><em>{{$value.author}}</em>{{$imports.formateDate($value.createAt)-$value.date.slice( 5, 6)}}个月前({{$value.date.slice(5)}})说:</b>
+            <strong>{{$value.intro}}</strong>
+          </li>
+      {{/each}}
+  </script>014\
   <script>
+    $(function () {
+      $('form').on('submit', function () {
+        //获取到用户在表单中输入的搜索关键字
+        var key = $(this).find('.search_txt').val();
+        location.href = `list.html?key=${key}`
+        //阻止默认提交行为
+        return false
+      })
+      
+
+
+      //文章热门排行
+      $.ajax({
+        url: 'http://47.111.184.55:8888/api/v1/index/rank',
+        type: 'get',
+        success: function (data) {
+          var html = template('rankingTpl', { response: data.data })
+          $('#ranking').html(html)
+          $('#ranking li:eq(0) span').addClass("first")
+          $('#ranking li:eq(1) span').addClass("second")
+          $('#ranking li:eq(2) span').addClass("third")
+        }
+      })
+
+      //热点图
+      $.ajax({
+        url: 'http://47.111.184.55:8888/api/v1/index/hotpic',
+        success: function (data) {
+          var html = template('HeatmapTpl', { data: data.data })
+          $('#Heatmap').html(html)
+          $('#Heatmap li:first-child').addClass("first")
+        }
+      })
+
+      //文章类型
+      $.ajax({
+        url: 'http://47.111.184.55:8888/api/v1/index/category',
+        success: function (data) {
+          var html = template('sortTpl', { response: data.data })
+          $('#sortBox').html(html)
+          $('#sortBoxs').html(html)
+        }
+      })
+
+      function formateDate() {
+        // 将日期字符串转换
+        date = new Date();
+        return date.getMonth() + 1;
+      }
+      template.defaults.imports.formateDate = formateDate
+      //最新评论
+      $.ajax({
+        url: 'http://47.111.184.55:8888/api/v1/index/latest_comment',
+        success: function (data) {
+          var html = template('commentTpl', { data: data.data })
+          $('#comment').html(html)
+        }
+      })
+    })
   </script>
 </body>
 
