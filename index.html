@@ -180,7 +180,7 @@
   //文章类型
   <script type="text/html" id="sortTpl">
         <li class="up"></li>
-      {{each response}}
+      {{each response.splice(0,5)}}
         <li><a href="#">{{$value.name}}</a></li>
       {{/each}}
     </script>
@@ -193,7 +193,7 @@
             <strong>{{$value.intro}}</strong>
           </li>
       {{/each}}
-  </script>014\
+  </script>
   <script>
     $(function () {
       $('form').on('submit', function () {
