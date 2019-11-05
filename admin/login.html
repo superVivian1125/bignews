@@ -68,7 +68,53 @@
 
     <!-- 业务逻辑代码 -->
     <script>
+      //实现登陆功能
+      $(function(){
+        //给登陆按钮绑定一个点击事件
+        $('.input_sub').on('click',function(){
+          //获取用户名的值
+          //获取密码框里的值
+          var useName=$('.input_txt').val().trim()
+          var password=$('.input_pass').val().trim()
+          console.log(password);
+          console.log(useName);
+          //判断用户名和密码是否为空
+          if(useName==""||password==""){
+            alert('请输入用户名或密码')
+            return
+          }
+          //发送ajax请求
+          $.ajax({
+             url:'http://47.111.184.55:8888/api/v1/admin/user/login',
+             type:'post', 
+             data:{
+              username:username,
+              password:password,
+              },
+              success:function(respond){
+                if(respond.code==200){
+                   //window下面传入token成功的值
+                  window.localStorage.setItem("token", respond.token)
+                   location.href('index.html')
+                }else{
+                  alert('登陆错误')
+                }
+  
+                 
+              }
+            
 
+          })
+         
+         //阻止默认事件跳转行为        
+          return false
+        })
+     
+  
+
+
+      })
+    
     </script>
   </body>
 </html>

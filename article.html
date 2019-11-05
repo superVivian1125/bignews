@@ -54,7 +54,7 @@
   </div>
 
   <div class="main_con clearfix">
-    <div class="left_con setfr">
+    <div class="left_con setfr" >
       <div class="breadcrumb">
         当前位置： <a href="#">首页</a> &gt; <a href="#">科技</a> &gt; 文章详情
       </div>
@@ -80,18 +80,23 @@
         下一篇： <a href="#">世界第一个可以玩游戏的马桶、世界上第一个可以玩游戏的茶杯</a>
       </div>
 
-      <form action="" class="comment_form">
-        <div class="form_group">
-          <label>用户名：</label>
-          <input type="text" placeholder="请输入用户名" class="comment_name">
-        </div>
-        <div class="form_group">
-          <label>评论内容：</label>
-          <textarea placeholder="请发表您的评论" class="comment_input"></textarea>
-        </div>
-        <div class="form_group">
-          <input type="submit" name="" value="评 论" class="comment_sub"></div>
-      </form>
+     <div  id="publish">
+        <form action="" class="comment_form" id="formFaher" >
+            <div class="form_group">
+                <label>用户名：</label>
+                <input type="text" placeholder="用户名：" class="comment_name">
+              </div>
+              <div class="form_group">
+                <label>评论内容：</label>
+                <textarea placeholder="评论内容：" class="comment_input"></textarea>
+              </div>
+              <div class="form_group">
+                <input type="submit" name="" value="评 论" class="comment_sub"></div>
+             
+        </form>
+      
+      
+     </div>
 
       <div class="comment_count">
         4条评论
@@ -204,14 +209,58 @@
     <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
     <p>电话：0755-****888 粤ICP备*******8号</p>
   </div>
-
+   <!-- 评论表单模板 -->
+   <!-- <script type="text/html" id="publishTemplate">
+    <form action="" class="comment_form" id="formadd" >
+        <div class="form_group">
+            <label>用户名：</label>
+            <input type="text" placeholder="{{$value.author}}" class="comment_name" id="author">
+          </div>
+          <div class="form_group">
+            <label>评论内容：</label>
+            <textarea placeholder="" class="comment_input" id="content">{{$value.content}}</textarea>
+          </div>
+          <div class="form_group">
+            <input type="submit" name="" value="评 论" class="comment_sub" id="comment"></div>
+         
+    </form>
+  
+  </script> -->
+  
 
   <script src="./js/jquery-1.12.4.min.js"></script>
   <script src="./js/template-web.js"></script>
-
+  
   <!-- 文章页面的 js 代码  -->
   <script>
+    $(function(){
+      $('.comment_form').on('submit',function(){
+        var userName=$('.comment_name').val().trim()
+        var content=$('.comment_input').val().trim()
+         
+        // console.log(content);
+        // console.log(userName);
+        
+        
+       $.ajax({
+         url:'http://47.111.184.55:8888/api/v1/index/post_comment',
+         type:'post',
+          data: {
+            author:userName ,
+            content:content,
+          },
+          success:function(data){
+            console.log(data);
+             //模板拼接
+          
+            
+          }
 
+       }) 
+       return false
+    })
+     
+    })
   </script>
 </body>
 
