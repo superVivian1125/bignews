@@ -17,24 +17,32 @@
     <div class="common_title">
       用户信息修改
     </div>
-    <div class="container-fluid common_con">
-      <form class="form-horizontal article_form">
+    <div class="container-fluid common_con" id="userBox">
+
+    </div>
+  </div>
+
+
+  <script src="js/jquery-1.12.4.min.js"></script>
+  <script src="js/template-web.js"></script>
+  <script type="text/html" id="userTpl">
+    <form class="form-horizontal article_form">
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">用户名称：</label>
           <div class="col-sm-4">
-            <input type="text" name="username" class="form-control username" id="inputEmail3" value="李思思">
+            <input type="text" name="username" class="form-control username" id="inputEmail3" value="{{data.username}}">
           </div>
         </div>
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">昵称：</label>
           <div class="col-sm-4">
-            <input type="text" name="nickname" class="form-control nickname" id="inputEmail3" value="思思">
+            <input type="text" name="nickname" class="form-control nickname" id="inputEmail3" value="{{data.nickname}}">
           </div>
         </div>
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">邮箱：</label>
           <div class="col-sm-4">
-            <input type="text" name="email" class="form-control email" id="inputEmail3" value="lisisi@126.com">
+            <input type="text" name="email" class="form-control email" id="inputEmail3" value="{{data.email}}">
           </div>
         </div>
 
@@ -46,7 +54,11 @@
             <!-- 给label标签的for属性赋值,值是input标签的id,那这样的话点击label就相当于点击了input -->
             <br>
             <label for="exampleInputFile">
+              {{if user_pic}}
+              <img src="{{data.user_pic}}" style="height: 50px;" alt="">
+              {{else}}
               <img src="./images/uploads_icon.jpg" style="height: 50px;" alt="">
+              {{/if}}
             </label>
           </div>
         </div>
@@ -54,7 +66,7 @@
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-2 control-label">密码：</label>
           <div class="col-sm-4">
-            <input type="password" name="password" class="form-control password" id="inputEmail3" value="12345678">
+            <input type="password" name="password" class="form-control password" id="inputEmail3" value="{{data.password}}">
           </div>
         </div>
 
@@ -65,15 +77,22 @@
           </div>
         </div>
       </form>
-    </div>
-  </div>
-
-
-  <script src="js/jquery-1.12.4.min.js"></script>
+  </script>
 
   <!-- 业务逻辑代码 -->
   <script>
+    //获取用户信息
+    $.ajax({
+      type: 'get',
+      url: 'http://47.111.184.55:8888/api/v1/admin/user/detail',
+      success: function (data) {
+        console.log(data)
+        var html = template('userTpl', data)
+        $('#userBox').html(html)
+      }
+    })
 
   </script>
 </body>
+
 </html>
